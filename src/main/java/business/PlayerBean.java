@@ -31,7 +31,7 @@ public class PlayerBean {
 	public void incluirPlayer(User user, LolPlayer lolPlayer) throws ConnectionException {
 				
 		FacadeAPI api = new FacadeAPI();
-		AbstractProfile absProfile = api.getSummoner(lolPlayer.getPlayerName(), lolPlayer.getRegion().name());
+		AbstractProfile absProfile = api.getProfile(lolPlayer.getPlayerName(), lolPlayer.getRegion().name());
 		
 		if(absProfile != null){
 			

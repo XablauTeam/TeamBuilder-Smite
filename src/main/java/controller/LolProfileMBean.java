@@ -26,8 +26,6 @@ public class LolProfileMBean extends GenericMBean {
 	@ManagedProperty("#{loginMBean.user}")
 	private User user;
 
-	private PlayerStatus playerStatus;
-
 	private LolPlayer player;
 
 	private LolTeam team;

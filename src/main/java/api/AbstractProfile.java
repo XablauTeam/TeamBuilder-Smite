@@ -6,6 +6,8 @@ public abstract class AbstractProfile {
 	private long id;
 	private long summonerLevel;
 
+	public AbstractProfile(){}
+	
 	public AbstractProfile(String name, long id, long summonerLevel) {
 		super();
 		this.name = name;

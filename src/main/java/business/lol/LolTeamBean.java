@@ -13,7 +13,6 @@ import model.entities.AbstractPlayer;
 import model.entities.AbstractTeam;
 import model.entities.LolPlayer;
 import model.entities.LolTeam;
-import model.persistence.service.LolPlayerService;
 import model.persistence.service.LolTeamService;
 
 @Stateless
