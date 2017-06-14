@@ -22,7 +22,6 @@ public abstract class AbstractPlayer {
 	@Column(name = "id_player")
 	private Integer idPlayer;
 	
-	
 	@Column(name = "playerName")
 	private String playerName;
 	
@@ -36,6 +35,9 @@ public abstract class AbstractPlayer {
 	//Identificado do player no jogo
 	@Column(name="gamePlayerID")
 	private long gamePlayerID;
+	
+	@Column(name="teamID")
+	private Integer teamID = 0;
 	
 	public Integer getIdPlayer() {
 		return idPlayer;
@@ -75,6 +77,14 @@ public abstract class AbstractPlayer {
 
 	public void setGamePlayerID(long gamePlayerID) {
 		this.gamePlayerID = gamePlayerID;
+	}
+
+	public Integer getTeamID() {
+		return teamID;
+	}
+
+	public void setTeamID(Integer teamID) {
+		this.teamID = teamID;
 	}
 	
 	

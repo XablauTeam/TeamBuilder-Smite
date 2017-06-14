@@ -1,18 +1,20 @@
 package api;
 
 import api.exceptions.ConnectionException;
-import api.lol.SummonerImpl;
+import api.smite.SmiteProfile;
 
 public class FacadeAPI implements InterfaceAPI {
 	
-	private SummonerImpl summonerProfile;
-	
-	public FacadeAPI(){
-		summonerProfile = new SummonerImpl();
+	private SmiteProfile profile;
+
+	public FacadeAPI()
+	{
+		profile = new SmiteProfile();
 	}
-	
-	public AbstractProfile getSummoner(String summoner, String region) throws ConnectionException{
-		return summonerProfile.summonerByName(new String[]{summoner}, region);
+
+	public AbstractProfile getProfile(String summoner, String region) throws ConnectionException
+	{
+		return profile.byName(new String[] { summoner }, region);
 	}
 	
 }

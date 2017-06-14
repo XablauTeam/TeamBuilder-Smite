@@ -9,7 +9,12 @@ main {
 }
 
 .icon-align {
-	vertical-align: text-bottom;
+	
+	 display: inline-flex;
+    vertical-align: middle;
+}
+.dados{
+	height: 65%;
 }
 
 .modal { width: 50% !important ; height:65% !important; max-height: 100% !important ; ;}

@@ -1,5 +1,7 @@
 package model.persistence.dao;
 
+import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.List;
 
 import org.hibernate.Session;
@@ -8,13 +10,14 @@ import org.hibernate.Transaction;
 import org.hibernate.boot.registry.StandardServiceRegistryBuilder;
 import org.hibernate.cfg.Configuration;
 
-import model.entities.LolPlayer;
+import model.entities.SmitePlayer;
+import model.entities.SmiteTeam;
 
-public class LolPlayerDAO implements GenericDAO<LolPlayer, Integer> {
+public class SmiteTeamDAO implements GenericDAO<SmiteTeam, Integer> {
 	private Session currentSession;
 	private Transaction currentTransaction;
 
-	public LolPlayerDAO() {
+	public SmiteTeamDAO() {
 	}
 	
 	public Session openCurrentSession() {
@@ -39,7 +42,8 @@ public class LolPlayerDAO implements GenericDAO<LolPlayer, Integer> {
 	
 	private static SessionFactory getSessionFactory() {
 		Configuration configuration = new Configuration().configure("/hibernate.cfg.xml");
-		configuration.addAnnotatedClass(LolPlayer.class);
+		configuration.addAnnotatedClass(SmitePlayer.class);
+		configuration.addAnnotatedClass(SmiteTeam.class);
 		StandardServiceRegistryBuilder builder = new StandardServiceRegistryBuilder()
 				.applySettings(configuration.getProperties());
 		SessionFactory sessionFactory = configuration.buildSessionFactory(builder.build());
@@ -62,32 +66,37 @@ public class LolPlayerDAO implements GenericDAO<LolPlayer, Integer> {
 		this.currentTransaction = currentTransaction;
 	}
 
-	public LolPlayer findById(Integer id) {
-		LolPlayer player = (LolPlayer) getCurrentSession().get(LolPlayer.class, id);
+	public SmiteTeam findById(Integer id) {
+		SmiteTeam player = (SmiteTeam) getCurrentSession().get(SmiteTeam.class, id);
 		return player;
 	}
 
-	public void insert(LolPlayer player) {
+	public List<SmiteTeam> findByField(String field, Object value){
+		@SuppressWarnings("unchecked")
+		ArrayList<SmiteTeam> arrayList = (ArrayList<SmiteTeam>) getCurrentSession().get(field, (Serializable) value);
+		return arrayList;
+	}
+	
+	public void insert(SmiteTeam player) {
 		getCurrentSession().save(player);
 	}
 
-	public void delete(LolPlayer player) {
+	public void delete(SmiteTeam player) {
 		getCurrentSession().delete(player);
 	}
 
-	public void update(LolPlayer player) {
+	public void update(SmiteTeam player) {
 		getCurrentSession().update(player);
 	}
 
 	@SuppressWarnings("unchecked")
-	public List<LolPlayer> findAll() {
-		List<LolPlayer> players = (List<LolPlayer>) getCurrentSession().createQuery("FROM lolplayer").list();
+	public List<SmiteTeam> findAll() {
+		List<SmiteTeam> players = (List<SmiteTeam>) getCurrentSession().createQuery("FROM SmiteTeam").list();
 		return players;
 	}
 	
 	public void deleteAll(){
-		List<LolPlayer> players = findAll();
-		for (LolPlayer player : players)
+		List<SmiteTeam> players = findAll();
+		for (SmiteTeam player : players)
 			delete(player);
-	}
-}
+	}}

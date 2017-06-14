@@ -19,7 +19,7 @@ public class LoginMBean extends GenericMBean {
 	private String senha;
 	private User user;
 
-	public String login() {
+	public String realizarLogin() {
 		try {
 			this.user = loginBean.login(getLogin(), getSenha()); 
 			return forward("principal.xhtml");

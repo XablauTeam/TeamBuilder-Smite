@@ -1,6 +1,6 @@
 package business.lol;
 
-public enum LolRegioes {
+public enum SmiteRegioes {
 	br("br1"), 
 	eune("eune1"),
 	euw("euw1"),
@@ -15,7 +15,7 @@ public enum LolRegioes {
 
 	private final String name;
 
-	private LolRegioes(String name) {
+	private SmiteRegioes(String name) {
 		this.name = name;
 	}
 

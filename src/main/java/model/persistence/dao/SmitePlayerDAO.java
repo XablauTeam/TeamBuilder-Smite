@@ -2,8 +2,6 @@ package model.persistence.dao;
 
 import java.util.List;
 
-
-
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.Transaction;
@@ -11,13 +9,12 @@ import org.hibernate.boot.registry.StandardServiceRegistryBuilder;
 import org.hibernate.cfg.Configuration;
 
 import model.entities.SmitePlayer;
-import model.entities.User;
 
-public class UserDAO implements GenericDAO<User, Integer> {
+public class SmitePlayerDAO implements GenericDAO<SmitePlayer, Integer> {
 	private Session currentSession;
 	private Transaction currentTransaction;
 
-	public UserDAO() {
+	public SmitePlayerDAO() {
 	}
 	
 	public Session openCurrentSession() {
@@ -42,7 +39,6 @@ public class UserDAO implements GenericDAO<User, Integer> {
 	
 	private static SessionFactory getSessionFactory() {
 		Configuration configuration = new Configuration().configure("/hibernate.cfg.xml");
-		configuration.addAnnotatedClass(User.class);
 		configuration.addAnnotatedClass(SmitePlayer.class);
 		StandardServiceRegistryBuilder builder = new StandardServiceRegistryBuilder()
 				.applySettings(configuration.getProperties());
@@ -66,44 +62,32 @@ public class UserDAO implements GenericDAO<User, Integer> {
 		this.currentTransaction = currentTransaction;
 	}
 
-	public User findById(Integer id) {
-		User usuario = (User) getCurrentSession().get(User.class, id);
-		return usuario;
+	public SmitePlayer findById(Integer id) {
+		SmitePlayer player = (SmitePlayer) getCurrentSession().get(SmitePlayer.class, id);
+		return player;
 	}
 
-	public void insert(User user) {
-		getCurrentSession().save(user);
+	public void insert(SmitePlayer player) {
+		getCurrentSession().save(player);
 	}
 
-	public void delete(User user) {
-		getCurrentSession().delete(user);
+	public void delete(SmitePlayer player) {
+		getCurrentSession().delete(player);
 	}
 
-	public void update(User user) {
-		getCurrentSession().update(user);
+	public void update(SmitePlayer player) {
+		getCurrentSession().update(player);
 	}
 
 	@SuppressWarnings("unchecked")
-	public List<User> findAll() {
-		List<User> usuarios = (List<User>) getCurrentSession().createQuery("FROM User").list();
-		return usuarios;
+	public List<SmitePlayer> findAll() {
+		List<SmitePlayer> players = (List<SmitePlayer>) getCurrentSession().createQuery("FROM SmitePlayer").list();
+		return players;
 	}
 	
 	public void deleteAll(){
-		List<User> usuarios = findAll();
-		for (User usuario : usuarios)
-			delete(usuario);
-	}
-	
-	@SuppressWarnings("unchecked")
-	public User login(String login, String password) {
-		List<User> usuarios = (List<User>) getCurrentSession()
-				.createQuery("FROM User WHERE login =:login AND password =:password")
-				.setParameter("login", login).setParameter("password", password).list();
-		if(usuarios.size() > 0)
-			return usuarios.get(0);
-		else{
-			return null;
-		}
+		List<SmitePlayer> players = findAll();
+		for (SmitePlayer player : players)
+			delete(player);
 	}
 }

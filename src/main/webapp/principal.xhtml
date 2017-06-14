@@ -11,49 +11,172 @@
 
 	<ui:composition template="template.xhtml">
 		<ui:define name="content">
-	
+
 			<div class="row">
 				<h:panelGroup id="result">
-				<div class="col s3 side-nav fixed">
-					<ul id="slide-out">
-						<li><h:form>
-								<h:commandLink class="" action="#{lolProfileMBean.logout()}"
-									value="Logout" />
-							</h:form></li>
-						<li><c:if test="${empty lolProfileMBean.user.player}">
-								<h:form>
-									<a class="modal-trigger" href="#modal1">Cadastrar Profile</a>
+					<div class="col s3 side-nav fixed">
+						<ul id="slide-out">
+							<li><h:form>
+									<h:commandLink class="" action="#{smiteProfileMBean.logout()}">
+									 <i class="small material-icons black-text text-darken-2 icon-align ">call_missed</i> Logout</h:commandLink>
+								</h:form></li>
+							<li><c:if test="${empty smiteProfileMBean.user.player}">
+									<h:form>
+										<a class="modal-trigger" href="#modal1">Cadastrar Profile</a>
 
-								</h:form>
-							</c:if> 
-							<c:if test="${not empty lolProfileMBean.user.player}">
-								<h:form>
-									<a class="modal-trigger" href="#modal2">Atualizar Profile</a>
-								</h:form>
-							</c:if></li>
-					</ul>
-				</div>
+									</h:form>
+								</c:if> <c:if test="${not empty smiteProfileMBean.user.player}">
+									<h:form>
+										<a class="modal-trigger" href="#modal2"><i class="small material-icons black-text text-darken-2 icon-align ">settings</i> Atualizar Profile</a>
+									</h:form>
+								</c:if></li>
+
+							<li><h:form>
+								<c:if test="${not empty smiteProfileMBean.user.player}">
+									<a class="modal-trigger" href="#modal3"><i class="small material-icons black-text text-darken-2 icon-align ">search</i>Procurar Time</a>
+									</c:if>
+								</h:form></li>
+						</ul>
+					</div>
 				</h:panelGroup>
 
 				<div class="col s9 offset-s3">
 					<h:messages
-								styleClass="errorMessage card-panel red lighten-2 white-text"
-								globalOnly="true">
-							</h:messages>
+						styleClass="errorMessage card-panel red lighten-2 white-text"
+						globalOnly="true">
+					</h:messages>
 					<!-- Teal page content  -->
-					<span class="flow-text"> Bem vindo
-						#{lolProfileMBean.user.nome}, </span>
+					<h4 class="indigo-text">TeamBuilder <strong>Smite</strong></h4>
+				<h6 class="indigo-text">- Building best choices to competitive
+					electronic games -</h6>
+						
+					
+					
+					 <div class="row">
+					 <!--  card Usuário/Profile -->
+       					<div class="col s6 ">
+          					<div class="card-panel deep-purple lighten-5 " style = "height: 17.2em;">
+	            				<div class="card-content blue-text text-darken-2">
+	              					<span class="card-title flow-text">Dados do Usuário</span>
+	              					
+	              					<ul>
+	              						<li> <i class="small material-icons black-text text-darken-2 icon-align ">perm_identity</i> #{smiteProfileMBean.user.login}</li>
+	              						<li> <i class="small material-icons black-text text-darken-2 icon-align ">email</i> #{smiteProfileMBean.user.email}</li>
+	              						<li> <i class="small material-icons black-text text-darken-2 icon-align ">assignment_ind</i> #{smiteProfileMBean.user.nome}</li>
+		              					</ul>	              					
+	            				</div>
+          					</div>
+        				</div>
+        				<div class="col s6 " >
+          					<div class="card-panel deep-purple lighten-5" style = "height: 17.2em;">
+	            				<div class="card-content blue-text text-darken-2">
+	              					<span class="card-title flow-text">Dados do Jogador</span>
+	              					<c:if test="${not empty smiteProfileMBean.user.player}">
+	              					<ul>
+	              						<li> <i class="small material-icons black-text text-darken-2 icon-align ">games</i> #{smiteProfileMBean.player.playerName}</li>
+	              						<li> <i class="small material-icons black-text text-darken-2 icon-align ">grade</i> #{smiteProfileMBean.player.playerLevel}</li>
+	              						<li> <i class="small material-icons black-text text-darken-2 icon-align ">language</i> #{smiteProfileMBean.player.region.name()}</li>
+	              						<li> <i class="small material-icons black-text text-darken-2 icon-align ">info_outline</i> #{smiteProfileMBean.player.status.name}</li>
+	              						<c:if test="${smiteProfileMBean.player.teamID != 0}">
+	              						<li> <i class="small material-icons black-text text-darken-2 icon-align ">loyalty</i> Id do time: #{smiteProfileMBean.player.teamID}</li>
+	              						</c:if>
+	              						<c:if test="${smiteProfileMBean.player.teamID == 0}">
+	              						<li> <i class="small material-icons black-text text-darken-2 icon-align ">assignment_ind</i> - </li>
+	              						</c:if>
+	              					</ul>
+	              					</c:if>
+	              					<c:if test="${empty smiteProfileMBean.user.player}">
+	              					<p>Você ainda não tem um jogador associado! <a class="modal-trigger" href="#modal1">Faça isso aqui!</a> </p>
+	              					</c:if>
+	            				</div>
+          					</div>
+        				</div>
+        				<!-- fim do card Usuário/ Profile -->
+        				
+        				<!-- Modal Visualizar Time -->
+        				<div class="col s12 " >
+          					<div class="card-panel deep-purple lighten-5">
+	            				<div class="card-content blue-text text-darken-2">
+	              					<span class="card-title flow-text">Dados do Time</span>
+	              					<c:if test="#{smiteProfileMBean.player.teamID != 0}">
+				
+					<h:panelGroup id="procurarTimeShow">
+						<h:form>
+							<table class = 'centered highlight responsive-table'>
+								<thead>
+									<tr>
+										<th></th>
+										<th>Solo</th>
+										<th>Jungler</th>
+										<th>Mid</th>
+										<th>Support</th>
+										<th>Bottom</th>
+									</tr>
+								</thead>
+
+								<tbody>
+									<tr>
+										<td>Nickname</td>
+										<c:if test="${not empty smiteProfileMBean.team.solo}">
+										<td><a class="modal-trigger" href="#modal4">#{smiteProfileMBean.team.solo.playerName} <i class="tiny material-icons black-text text-darken-2 icon-align ">info</i></a></td>
+										</c:if>
+										<c:if test="${empty smiteProfileMBean.team.solo}">
+										<td> - </td>
+										</c:if>
+										<c:if test="${not empty smiteProfileMBean.team.jungler}">
+										<td><a class="modal-trigger" href="#modal5">#{smiteProfileMBean.team.jungler.playerName} <i class="tiny material-icons black-text text-darken-2 icon-align ">info</i></a></td>
+										</c:if>
+										<c:if test="${empty smiteProfileMBean.team.jungler}">
+										<td> - </td>
+										</c:if>
+										<c:if test="${not empty smiteProfileMBean.team.mid}">
+										<td><a class="modal-trigger" href="#modal6">#{smiteProfileMBean.team.mid.playerName} <i class="tiny material-icons black-text text-darken-2 icon-align ">info</i></a></td>
+										</c:if>
+										<c:if test="${empty smiteProfileMBean.team.mid}">
+										<td> - </td>
+										</c:if>
+										<c:if test="${not empty smiteProfileMBean.team.support}">
+										<td><a class="modal-trigger" href="#modal7">#{smiteProfileMBean.team.support.playerName} <i class="tiny material-icons black-text text-darken-2 icon-align ">info</i></a></td>
+										</c:if>
+										<c:if test="${empty smiteProfileMBean.team.support}">
+										<td> - </td>
+										</c:if>
+										<c:if test="${not empty smiteProfileMBean.team.bottom}">
+										<td><a class="modal-trigger" href="#modal8">#{smiteProfileMBean.team.bottom.playerName} <i class="tiny material-icons black-text text-darken-2 icon-align ">info</i></a></td>
+										</c:if>
+										<c:if test="${empty smiteProfileMBean.team.bottom}">
+										<td> - </td>
+										</c:if>
+									</tr>
+								</tbody>
+							</table>
+						</h:form>
+					</h:panelGroup>
+					</c:if>
+					<c:if test="#{smiteProfileMBean.player.teamID == 0}">
+					 <p>Você ainda não tem um time associado! Faça isso no menu lateral ou<a class="modal-trigger" href="#modal3"> aqui!</a> </p>
+					</c:if>
 				</div>
-
-
-
 			</div>
+        				
+        				</div>
+      				</div>
+    				
+        				
+      			</div>
+						
 			
+			
+				
+			
+			
+			</div>
+
 			<!--Modal Incluir Profile -->
 			<div id="modal1" class="modal">
 
 				<div class="modal-content">
-					
+
 					<h5>Incluir Profile</h5>
 					<div class="divider"></div>
 					<h:panelGroup id="incluirPerfilForm">
@@ -62,33 +185,38 @@
 								<div class='input-field col s6'>
 									<h:inputText class='validate' type="text" name="incluirProfile"
 										id='incluirProfile'
-										value="#{lolProfileMBean.player.playerName}" />
+										value="#{smiteProfileMBean.player.playerName}" />
 									<label for="incluirProfile">Game Profile</label>
 								</div>
 								<div class='col s6'>
 									<label for='IncluirRegiaoProfile'>Região</label>
-									<h:selectOneMenu id="IncluirRegiaoProfile" value="#{lolProfileMBean.player.region}">
+									<h:selectOneMenu id="IncluirRegiaoProfile"
+										value="#{smiteProfileMBean.player.region}">
 										<f:selectItem itemValue="" itemLabel="Selecione" />
-										<f:selectItems value="#{lolProfileMBean.regioes}" var="_regioes" itemLabel="#{_regioes.name}" itemValue="#{_regioes}" />
+										<f:selectItems value="#{smiteProfileMBean.regioes}"
+											var="_regioes" itemLabel="#{_regioes.name}"
+											itemValue="#{_regioes}" />
 									</h:selectOneMenu>
 								</div>
 								<div class='col s6'>
 									<label for='IncluirRoleProfile'>Posição</label>
-									<h:selectOneMenu id="IncluirRoleProfile" value="#{lolProfileMBean.player.role}">
+									<h:selectOneMenu id="IncluirRoleProfile"
+										value="#{smiteProfileMBean.player.role}">
 										<f:selectItem itemValue="" itemLabel="Selecione" />
-										<f:selectItems value="#{lolProfileMBean.roles}" var="_role" itemLabel="#{_role.name}" itemValue="#{_role}" />
+										<f:selectItems value="#{smiteProfileMBean.roles}" var="_role"
+											itemLabel="#{_role.name}" itemValue="#{_role}" />
 									</h:selectOneMenu>
 								</div>
 								<div class='col s6'>
 									<label for='incluirStatusProfile'>Status</label>
-									<h:selectOneMenu id="incluirStatusProfile" value="#{lolProfileMBean.player.status}" styleClass="selectContainer" disabled="true">
-										<f:selectItems value="#{lolProfileMBean.playerStatus}" var="_status" itemLabel="#{_status.name}" itemValue="#{_status}" />
+									<h:selectOneMenu id="incluirStatusProfile"	value="#{smiteProfileMBean.player.status}" styleClass="selectContainer" disabled="true">
+										<f:selectItems value="#{smiteProfileMBean.playerStatus}"	var="_status" itemLabel="#{_status.name}"	itemValue="#{_status}" />
 									</h:selectOneMenu>
 								</div>
 							</div>
 							<h:commandButton class="btn waves-effect waves-light"
-								action="#{lolProfileMBean.cadastrarPlayer()}" value="Gravar">
-								 
+								action="#{smiteProfileMBean.cadastrarPlayer()}" value="Gravar">
+
 							</h:commandButton>
 						</h:form>
 					</h:panelGroup>
@@ -108,19 +236,130 @@
 								<div class='input-field col s6'>
 									<h:inputText class='validate' type="text"
 										name="atualizarProfile" id='atualizarProfile'
-										value="#{lolProfileMBean.player.playerName}" />
+										value="#{smiteProfileMBean.player.playerName}" />
 									<label for="atualizarProfile">Game Profile</label>
 								</div>
-								<div class='input-field col s6'></div>
+								
 							</div>
+							<div class='col s6'>
+									<label for='IncluirRegiaoProfile'>Região</label>
+									<h:selectOneMenu id="atualizarRegiaoProfile"
+										value="#{smiteProfileMBean.player.region}">
+										<f:selectItem itemValue="" itemLabel="Selecione" />
+										<f:selectItems value="#{smiteProfileMBean.regioes}" var="_regioes" itemLabel="#{_regioes.name}" itemValue="#{_regioes}" />
+									</h:selectOneMenu>
+								</div>
+								<div class='col s6'>
+									<label for='IncluirRoleProfile'>Posição</label>
+									<h:selectOneMenu id="atualizarRoleProfile" value="#{smiteProfileMBean.player.role}">
+										<f:selectItem itemValue="" itemLabel="Selecione" />
+										<f:selectItems value="#{smiteProfileMBean.roles}" var="_role"	itemLabel="#{_role.name}" itemValue="#{_role}" />
+									</h:selectOneMenu>
+								</div>
+								<div class='col s6'>
+									<label for='incluirStatusProfile'>Status</label>
+									<h:selectOneMenu id="incluirStatusProfile"	value="#{smiteProfileMBean.player.status}" styleClass="selectContainer">
+										<f:selectItems value="#{smiteProfileMBean.playerStatus}" var="_status" itemLabel="#{_status.name}" itemValue="#{_status}" />
+									</h:selectOneMenu>
+								</div>
 							<h:commandButton class="btn waves-effect waves-light"
-								action="#{lolProfileMBean.cadastrarPlayer()}" value="Atualizar" />
+								action="#{smiteProfileMBean.cadastrarPlayer()}" value="Atualizar" />
 						</h:form>
 					</h:panelGroup>
 				</div>
 			</div>
 			<!-- Fim Modal Cadastrar Player -->
+			<!-- Modal Buscar Time -->
+			<div id="modal3" class="modal modalshort">
 
+				<div class="modal-content">
+
+					<h5>Procurar Time</h5>
+					
+					<h:panelGroup id="procurarTime">
+						<h:form>
+							<div class='row'>
+								<h6 class='center-align col s12 valign-wrapper'>
+									Junte-se a um time com jogadores que também estão interessados
+									em alcançar o topo do ranking!</h6>
+							</div>
+							<center>
+							<h:commandButton
+								class="btn waves-effect waves-light center-align valign-wrapper"
+								action="#{smiteProfileMBean.procurarTime()}" value="Clique Aqui" />
+								</center>
+						</h:form>
+					</h:panelGroup>
+				</div>
+			</div>
+			<!-- Fim Modal Buscar Time -->
+			
+			<!-- Fim Modal Visualizar Time -->
+			<!-- Modal top player -->
+			<div id="modal4" class="modal modalshort">
+
+				<div class="modal-content">
+					<h5> <strong> #{smiteProfileMBean.team.solo.playerName} </strong></h5>
+					<ul>
+						<li> Level: #{smiteProfileMBean.team.solo.playerLevel} </li>
+						<li> Role: #{smiteProfileMBean.team.solo.role} </li>
+					</ul>
+				</div>
+			</div>
+			<!-- Fim Modal top player -->
+			
+			<!-- Modal jungler player -->
+			<div id="modal5" class="modal modalshort">
+
+				<div class="modal-content">
+					<h5> <strong> #{smiteProfileMBean.team.jungler.playerName} </strong></h5>
+					<ul>
+						<li> Level: #{smiteProfileMBean.team.jungler.playerLevel} </li>
+						<li> Role: #{smiteProfileMBean.team.jungler.role} </li>
+					</ul>
+				</div>
+			</div>
+			<!-- Fim Modal jungler player -->
+			
+			<!-- Modal mid player -->
+			<div id="modal6" class="modal modalshort">
+
+				<div class="modal-content">
+					<h5> <strong> #{smiteProfileMBean.team.mid.playerName} </strong></h5>
+					<ul>
+						<li> Level: #{smiteProfileMBean.team.mid.playerLevel} </li>
+						<li> Role: #{smiteProfileMBean.team.mid.role} </li>
+					</ul>
+				</div>
+			</div>
+			<!-- Fim Modal mid player -->
+			
+			<!-- Modal support player -->
+			<div id="modal7" class="modal modalshort">
+
+				<div class="modal-content">
+					<h5> <strong> #{smiteProfileMBean.team.support.playerName} </strong></h5>
+					<ul>
+						<li> Level: #{smiteProfileMBean.team.support.playerLevel} </li>
+						<li> Role: #{smiteProfileMBean.team.support.role} </li>
+					</ul>
+				</div>
+			</div>
+			<!-- Fim Modal support player -->
+			
+			<!-- Modal bottom player -->
+			<div id="modal8" class="modal modalshort">
+
+				<div class="modal-content">
+					<h5> <strong> #{smiteProfileMBean.team.bottom.playerName} </strong></h5>
+					<ul>
+						<li> Level: #{smiteProfileMBean.team.bottom.playerLevel} </li>
+						<li> Role: #{smiteProfileMBean.team.bottom.role} </li>
+					</ul>
+				</div>
+			</div>
+			<!-- Fim Modal bottom player -->
+			
 
 		</ui:define>
 		<ui:define name="javascript">
@@ -131,7 +370,7 @@
 				    $('.modal-trigger').leanModal();
 				  });
 			</script>
-			
+
 			<script>
 			$(document).ready(function() {
     $('select').material_select();
