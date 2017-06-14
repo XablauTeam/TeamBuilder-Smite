@@ -6,54 +6,54 @@ import java.util.List;
 import javax.ejb.Stateless;
 
 import business.TeamStatus;
-import model.entities.LolTeam;
-import model.persistence.dao.LolTeamDAO;
+import model.entities.SmiteTeam;
+import model.persistence.dao.SmiteTeamDAO;
 
 @Stateless
-public class LolTeamService {
+public class SmiteTeamService {
 
-	private static LolTeamDAO lolteamDAO;
+	private static SmiteTeamDAO lolteamDAO;
 
-	public LolTeamService() {
-			lolteamDAO = new LolTeamDAO();
+	public SmiteTeamService() {
+			lolteamDAO = new SmiteTeamDAO();
 		}
 
-	public void insert(LolTeam team) {
+	public void insert(SmiteTeam team) {
 		lolteamDAO.openCurrentSessionwithTransaction();
 		lolteamDAO.insert(team);
 		lolteamDAO.closeCurrentSessionwithTransaction();
 	}
 
-	public void update(LolTeam team) {
+	public void update(SmiteTeam team) {
 		lolteamDAO.openCurrentSessionwithTransaction();
 		lolteamDAO.update(team);
 		lolteamDAO.closeCurrentSessionwithTransaction();
 	}
 
-	public LolTeam findById(Integer id) {
+	public SmiteTeam findById(Integer id) {
 		lolteamDAO.openCurrentSession();
-		LolTeam team = lolteamDAO.findById(id);
+		SmiteTeam team = lolteamDAO.findById(id);
 		lolteamDAO.closeCurrentSession();
 		return team;
 	}
 	
-	public List<LolTeam> findIncompleteTeams(){
+	public List<SmiteTeam> findIncompleteTeams(){
 		lolteamDAO.openCurrentSession();
-		ArrayList<LolTeam> teamList = (ArrayList<LolTeam>) lolteamDAO.findByField("status_time", TeamStatus.INCOMPLETE);
+		ArrayList<SmiteTeam> teamList = (ArrayList<SmiteTeam>) lolteamDAO.findByField("status_time", TeamStatus.INCOMPLETE);
 		lolteamDAO.closeCurrentSession();
 		return teamList;
 	}
 	
 	public void delete(Integer id) {
 		lolteamDAO.openCurrentSessionwithTransaction();
-		LolTeam team = lolteamDAO.findById(id);
+		SmiteTeam team = lolteamDAO.findById(id);
 		lolteamDAO.delete(team);
 		lolteamDAO.closeCurrentSessionwithTransaction();
 	}
 
-	public List<LolTeam> findAll() {
+	public List<SmiteTeam> findAll() {
 		lolteamDAO.openCurrentSession();
-		List<LolTeam> teams = lolteamDAO.findAll();
+		List<SmiteTeam> teams = lolteamDAO.findAll();
 		lolteamDAO.closeCurrentSession();
 		return teams;
 	}
@@ -64,7 +64,7 @@ public class LolTeamService {
 		lolteamDAO.closeCurrentSessionwithTransaction();
 	}
 
-	public LolTeamDAO usuarioDAO() {
+	public SmiteTeamDAO usuarioDAO() {
 		return lolteamDAO;
 	}
 }

@@ -7,40 +7,40 @@ import api.AbstractProfile;
 import api.FacadeAPI;
 import api.exceptions.ConnectionException;
 import business.exceptions.BusinessException;
-import model.entities.LolPlayer;
+import model.entities.SmitePlayer;
 import model.entities.User;
-import model.persistence.service.LolPlayerService;
+import model.persistence.service.SmitePlayerService;
 import model.persistence.service.UserService;
 
 @Stateless
 public class PlayerBean {
 	
 	@EJB
-	private LolPlayerService lolPlayerService;
+	private SmitePlayerService smitePlayerService;
 	@EJB
 	private UserService userService;
 
-	public LolPlayer findById(Integer id) throws BusinessException {
-		LolPlayer ab = lolPlayerService.findById(id);
+	public SmitePlayer findById(Integer id) throws BusinessException {
+		SmitePlayer ab = smitePlayerService.findById(id);
 		if (ab != null)
 			return ab;
 		else
 			throw new BusinessException("Player não encontrado.");
 	}
 
-	public void incluirPlayer(User user, LolPlayer lolPlayer) throws ConnectionException {
+	public void incluirPlayer(User user, SmitePlayer smitePlayer) throws ConnectionException {
 				
 		FacadeAPI api = new FacadeAPI();
-		AbstractProfile absProfile = api.getProfile(lolPlayer.getPlayerName(), lolPlayer.getRegion().name());
+		AbstractProfile absProfile = api.getProfile(smitePlayer.getPlayerName(), smitePlayer.getRegion().name());
 		
 		if(absProfile != null){
 			
-			lolPlayer.setGamePlayerID(absProfile.getId());
-			lolPlayer.setPlayerLevel(absProfile.getLevel());
-			lolPlayer.setPlayerName(absProfile.getName());
+			smitePlayer.setGamePlayerID(absProfile.getId());
+			smitePlayer.setPlayerLevel(absProfile.getLevel());
+			smitePlayer.setPlayerName(absProfile.getName());
 			
 			User auxUser = userService.findById(user.getIdUsuario());
-			auxUser.setPlayer(lolPlayer);
+			auxUser.setPlayer(smitePlayer);
 			userService.update(auxUser);
 			
 		}else{
@@ -49,8 +49,8 @@ public class PlayerBean {
 		
 	}
 	
-	public void atualizarPlayer(LolPlayer player){
-		lolPlayerService.update(player);
+	public void atualizarPlayer(SmitePlayer player){
+		smitePlayerService.update(player);
 	}
 
 }

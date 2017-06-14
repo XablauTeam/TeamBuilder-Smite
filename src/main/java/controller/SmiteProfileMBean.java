@@ -12,29 +12,29 @@ import javax.faces.bean.SessionScoped;
 import business.PlayerBean;
 import business.PlayerStatus;
 import business.exceptions.BusinessException;
-import business.lol.LolRegioes;
-import business.lol.LolRole;
-import business.lol.LolTeamBean;
-import model.entities.LolPlayer;
-import model.entities.LolTeam;
+import business.lol.SmiteRegioes;
+import business.lol.SmiteRole;
+import business.lol.SoloTeamBean;
+import model.entities.SmitePlayer;
+import model.entities.SmiteTeam;
 import model.entities.User;
 
-@ManagedBean(name = "lolProfileMBean")
+@ManagedBean(name = "smiteProfileMBean")
 @SessionScoped
-public class LolProfileMBean extends GenericMBean {
+public class SmiteProfileMBean extends GenericMBean {
 
 	@ManagedProperty("#{loginMBean.user}")
 	private User user;
 
-	private LolPlayer player;
+	private SmitePlayer player;
 
-	private LolTeam team;
+	private SmiteTeam team;
 
 	@EJB
 	PlayerBean playerBean;
 
 	@EJB
-	LolTeamBean teamBean;
+	SoloTeamBean teamBean;
 
 	@PostConstruct
 	public void onLoad() {
@@ -42,7 +42,7 @@ public class LolProfileMBean extends GenericMBean {
 			this.player = playerBean.findById(user.getIdUsuario());
 			team = teamBean.findTeamByID(this.player.getTeamID());
 		} catch (BusinessException e) {
-			player = new LolPlayer();
+			player = new SmitePlayer();
 		}
 	}
 
@@ -61,9 +61,9 @@ public class LolProfileMBean extends GenericMBean {
 		try {
 			if(user.getPlayer().getTeamID() != 0)
 				teamBean.removePlayerFromTeam(player);
-			team = (LolTeam) teamBean.findTeam(player);
+			team = (SmiteTeam) teamBean.findTeam(player);
 			if(team == null)
-				team = (LolTeam) teamBean.createNewTeam(player);
+				team = (SmiteTeam) teamBean.createNewTeam(player);
 			teamBean.insertPlayerInTeam(player, team);
 		} catch (Exception e) {
 			incluirErro(e.getMessage());
@@ -79,19 +79,19 @@ public class LolProfileMBean extends GenericMBean {
 		this.user = user;
 	}
 
-	public LolPlayer getPlayer() {
+	public SmitePlayer getPlayer() {
 		return player;
 	}
 
-	public void setPlayer(LolPlayer player) {
+	public void setPlayer(SmitePlayer player) {
 		this.player = player;
 	}
 
-	public LolTeam getTeam() {
+	public SmiteTeam getTeam() {
 		return team;
 	}
 
-	public void setTeam(LolTeam team) {
+	public void setTeam(SmiteTeam team) {
 		this.team = team;
 	}
 
@@ -103,17 +103,17 @@ public class LolProfileMBean extends GenericMBean {
 		return itens;
 	}
 
-	public List<LolRole> getRoles() {
-		List<LolRole> itens = new ArrayList<LolRole>();
-		for (LolRole role : LolRole.values()) {
+	public List<SmiteRole> getRoles() {
+		List<SmiteRole> itens = new ArrayList<SmiteRole>();
+		for (SmiteRole role : SmiteRole.values()) {
 			itens.add(role);
 		}
 		return itens;
 	}
 
-	public List<LolRegioes> getRegioes() {
-		List<LolRegioes> itens = new ArrayList<LolRegioes>();
-		for (LolRegioes regiao : LolRegioes.values()) {
+	public List<SmiteRegioes> getRegioes() {
+		List<SmiteRegioes> itens = new ArrayList<SmiteRegioes>();
+		for (SmiteRegioes regiao : SmiteRegioes.values()) {
 			itens.add(regiao);
 		}
 		return itens;

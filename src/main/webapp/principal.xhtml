@@ -17,22 +17,22 @@
 					<div class="col s3 side-nav fixed">
 						<ul id="slide-out">
 							<li><h:form>
-									<h:commandLink class="" action="#{lolProfileMBean.logout()}">
+									<h:commandLink class="" action="#{smiteProfileMBean.logout()}">
 									 <i class="small material-icons black-text text-darken-2 icon-align ">call_missed</i> Logout</h:commandLink>
 								</h:form></li>
-							<li><c:if test="${empty lolProfileMBean.user.player}">
+							<li><c:if test="${empty smiteProfileMBean.user.player}">
 									<h:form>
 										<a class="modal-trigger" href="#modal1">Cadastrar Profile</a>
 
 									</h:form>
-								</c:if> <c:if test="${not empty lolProfileMBean.user.player}">
+								</c:if> <c:if test="${not empty smiteProfileMBean.user.player}">
 									<h:form>
 										<a class="modal-trigger" href="#modal2"><i class="small material-icons black-text text-darken-2 icon-align ">settings</i> Atualizar Profile</a>
 									</h:form>
 								</c:if></li>
 
 							<li><h:form>
-								<c:if test="${not empty lolProfileMBean.user.player}">
+								<c:if test="${not empty smiteProfileMBean.user.player}">
 									<a class="modal-trigger" href="#modal3"><i class="small material-icons black-text text-darken-2 icon-align ">search</i>Procurar Time</a>
 									</c:if>
 								</h:form></li>
@@ -46,7 +46,7 @@
 						globalOnly="true">
 					</h:messages>
 					<!-- Teal page content  -->
-					<h4 class="indigo-text">TeamBuilder<strong>Smite</strong></h4>
+					<h4 class="indigo-text">TeamBuilder <strong>Smite</strong></h4>
 				<h6 class="indigo-text">- Building best choices to competitive
 					electronic games -</h6>
 						
@@ -60,9 +60,9 @@
 	              					<span class="card-title flow-text">Dados do Usuário</span>
 	              					
 	              					<ul>
-	              						<li> <i class="small material-icons black-text text-darken-2 icon-align ">perm_identity</i> #{lolProfileMBean.user.login}</li>
-	              						<li> <i class="small material-icons black-text text-darken-2 icon-align ">email</i> #{lolProfileMBean.user.email}</li>
-	              						<li> <i class="small material-icons black-text text-darken-2 icon-align ">assignment_ind</i> #{lolProfileMBean.user.nome}</li>
+	              						<li> <i class="small material-icons black-text text-darken-2 icon-align ">perm_identity</i> #{smiteProfileMBean.user.login}</li>
+	              						<li> <i class="small material-icons black-text text-darken-2 icon-align ">email</i> #{smiteProfileMBean.user.email}</li>
+	              						<li> <i class="small material-icons black-text text-darken-2 icon-align ">assignment_ind</i> #{smiteProfileMBean.user.nome}</li>
 		              					</ul>	              					
 	            				</div>
           					</div>
@@ -71,21 +71,21 @@
           					<div class="card-panel deep-purple lighten-5" style = "height: 17.2em;">
 	            				<div class="card-content blue-text text-darken-2">
 	              					<span class="card-title flow-text">Dados do Jogador</span>
-	              					<c:if test="${not empty lolProfileMBean.user.player}">
+	              					<c:if test="${not empty smiteProfileMBean.user.player}">
 	              					<ul>
-	              						<li> <i class="small material-icons black-text text-darken-2 icon-align ">games</i> #{lolProfileMBean.player.playerName}</li>
-	              						<li> <i class="small material-icons black-text text-darken-2 icon-align ">grade</i> #{lolProfileMBean.player.playerLevel}</li>
-	              						<li> <i class="small material-icons black-text text-darken-2 icon-align ">language</i> #{lolProfileMBean.player.region.name()}</li>
-	              						<li> <i class="small material-icons black-text text-darken-2 icon-align ">info_outline</i> #{lolProfileMBean.player.status.name}</li>
-	              						<c:if test="${lolProfileMBean.player.teamID != 0}">
-	              						<li> <i class="small material-icons black-text text-darken-2 icon-align ">loyalty</i> Id do time: #{lolProfileMBean.player.teamID}</li>
+	              						<li> <i class="small material-icons black-text text-darken-2 icon-align ">games</i> #{smiteProfileMBean.player.playerName}</li>
+	              						<li> <i class="small material-icons black-text text-darken-2 icon-align ">grade</i> #{smiteProfileMBean.player.playerLevel}</li>
+	              						<li> <i class="small material-icons black-text text-darken-2 icon-align ">language</i> #{smiteProfileMBean.player.region.name()}</li>
+	              						<li> <i class="small material-icons black-text text-darken-2 icon-align ">info_outline</i> #{smiteProfileMBean.player.status.name}</li>
+	              						<c:if test="${smiteProfileMBean.player.teamID != 0}">
+	              						<li> <i class="small material-icons black-text text-darken-2 icon-align ">loyalty</i> Id do time: #{smiteProfileMBean.player.teamID}</li>
 	              						</c:if>
-	              						<c:if test="${lolProfileMBean.player.teamID == 0}">
+	              						<c:if test="${smiteProfileMBean.player.teamID == 0}">
 	              						<li> <i class="small material-icons black-text text-darken-2 icon-align ">assignment_ind</i> - </li>
 	              						</c:if>
 	              					</ul>
 	              					</c:if>
-	              					<c:if test="${empty lolProfileMBean.user.player}">
+	              					<c:if test="${empty smiteProfileMBean.user.player}">
 	              					<p>Você ainda não tem um jogador associado! <a class="modal-trigger" href="#modal1">Faça isso aqui!</a> </p>
 	              					</c:if>
 	            				</div>
@@ -98,7 +98,7 @@
           					<div class="card-panel deep-purple lighten-5">
 	            				<div class="card-content blue-text text-darken-2">
 	              					<span class="card-title flow-text">Dados do Time</span>
-	              					<c:if test="#{lolProfileMBean.player.teamID != 0}">
+	              					<c:if test="#{smiteProfileMBean.player.teamID != 0}">
 				
 					<h:panelGroup id="procurarTimeShow">
 						<h:form>
@@ -106,7 +106,7 @@
 								<thead>
 									<tr>
 										<th></th>
-										<th>Top</th>
+										<th>Solo</th>
 										<th>Jungler</th>
 										<th>Mid</th>
 										<th>Support</th>
@@ -117,34 +117,34 @@
 								<tbody>
 									<tr>
 										<td>Nickname</td>
-										<c:if test="${not empty lolProfileMBean.team.top}">
-										<td><a class="modal-trigger" href="#modal4">#{lolProfileMBean.team.top.playerName} <i class="tiny material-icons black-text text-darken-2 icon-align ">info</i></a></td>
+										<c:if test="${not empty smiteProfileMBean.team.solo}">
+										<td><a class="modal-trigger" href="#modal4">#{smiteProfileMBean.team.solo.playerName} <i class="tiny material-icons black-text text-darken-2 icon-align ">info</i></a></td>
 										</c:if>
-										<c:if test="${empty lolProfileMBean.team.top}">
+										<c:if test="${empty smiteProfileMBean.team.solo}">
 										<td> - </td>
 										</c:if>
-										<c:if test="${not empty lolProfileMBean.team.jungler}">
-										<td><a class="modal-trigger" href="#modal5">#{lolProfileMBean.team.jungler.playerName} <i class="tiny material-icons black-text text-darken-2 icon-align ">info</i></a></td>
+										<c:if test="${not empty smiteProfileMBean.team.jungler}">
+										<td><a class="modal-trigger" href="#modal5">#{smiteProfileMBean.team.jungler.playerName} <i class="tiny material-icons black-text text-darken-2 icon-align ">info</i></a></td>
 										</c:if>
-										<c:if test="${empty lolProfileMBean.team.jungler}">
+										<c:if test="${empty smiteProfileMBean.team.jungler}">
 										<td> - </td>
 										</c:if>
-										<c:if test="${not empty lolProfileMBean.team.mid}">
-										<td><a class="modal-trigger" href="#modal6">#{lolProfileMBean.team.mid.playerName} <i class="tiny material-icons black-text text-darken-2 icon-align ">info</i></a></td>
+										<c:if test="${not empty smiteProfileMBean.team.mid}">
+										<td><a class="modal-trigger" href="#modal6">#{smiteProfileMBean.team.mid.playerName} <i class="tiny material-icons black-text text-darken-2 icon-align ">info</i></a></td>
 										</c:if>
-										<c:if test="${empty lolProfileMBean.team.mid}">
+										<c:if test="${empty smiteProfileMBean.team.mid}">
 										<td> - </td>
 										</c:if>
-										<c:if test="${not empty lolProfileMBean.team.support}">
-										<td><a class="modal-trigger" href="#modal7">#{lolProfileMBean.team.support.playerName} <i class="tiny material-icons black-text text-darken-2 icon-align ">info</i></a></td>
+										<c:if test="${not empty smiteProfileMBean.team.support}">
+										<td><a class="modal-trigger" href="#modal7">#{smiteProfileMBean.team.support.playerName} <i class="tiny material-icons black-text text-darken-2 icon-align ">info</i></a></td>
 										</c:if>
-										<c:if test="${empty lolProfileMBean.team.support}">
+										<c:if test="${empty smiteProfileMBean.team.support}">
 										<td> - </td>
 										</c:if>
-										<c:if test="${not empty lolProfileMBean.team.bottom}">
-										<td><a class="modal-trigger" href="#modal8">#{lolProfileMBean.team.bottom.playerName} <i class="tiny material-icons black-text text-darken-2 icon-align ">info</i></a></td>
+										<c:if test="${not empty smiteProfileMBean.team.bottom}">
+										<td><a class="modal-trigger" href="#modal8">#{smiteProfileMBean.team.bottom.playerName} <i class="tiny material-icons black-text text-darken-2 icon-align ">info</i></a></td>
 										</c:if>
-										<c:if test="${empty lolProfileMBean.team.bottom}">
+										<c:if test="${empty smiteProfileMBean.team.bottom}">
 										<td> - </td>
 										</c:if>
 									</tr>
@@ -153,7 +153,7 @@
 						</h:form>
 					</h:panelGroup>
 					</c:if>
-					<c:if test="#{lolProfileMBean.player.teamID == 0}">
+					<c:if test="#{smiteProfileMBean.player.teamID == 0}">
 					 <p>Você ainda não tem um time associado! Faça isso no menu lateral ou<a class="modal-trigger" href="#modal3"> aqui!</a> </p>
 					</c:if>
 				</div>
@@ -185,15 +185,15 @@
 								<div class='input-field col s6'>
 									<h:inputText class='validate' type="text" name="incluirProfile"
 										id='incluirProfile'
-										value="#{lolProfileMBean.player.playerName}" />
+										value="#{smiteProfileMBean.player.playerName}" />
 									<label for="incluirProfile">Game Profile</label>
 								</div>
 								<div class='col s6'>
 									<label for='IncluirRegiaoProfile'>Região</label>
 									<h:selectOneMenu id="IncluirRegiaoProfile"
-										value="#{lolProfileMBean.player.region}">
+										value="#{smiteProfileMBean.player.region}">
 										<f:selectItem itemValue="" itemLabel="Selecione" />
-										<f:selectItems value="#{lolProfileMBean.regioes}"
+										<f:selectItems value="#{smiteProfileMBean.regioes}"
 											var="_regioes" itemLabel="#{_regioes.name}"
 											itemValue="#{_regioes}" />
 									</h:selectOneMenu>
@@ -201,21 +201,21 @@
 								<div class='col s6'>
 									<label for='IncluirRoleProfile'>Posição</label>
 									<h:selectOneMenu id="IncluirRoleProfile"
-										value="#{lolProfileMBean.player.role}">
+										value="#{smiteProfileMBean.player.role}">
 										<f:selectItem itemValue="" itemLabel="Selecione" />
-										<f:selectItems value="#{lolProfileMBean.roles}" var="_role"
+										<f:selectItems value="#{smiteProfileMBean.roles}" var="_role"
 											itemLabel="#{_role.name}" itemValue="#{_role}" />
 									</h:selectOneMenu>
 								</div>
 								<div class='col s6'>
 									<label for='incluirStatusProfile'>Status</label>
-									<h:selectOneMenu id="incluirStatusProfile"	value="#{lolProfileMBean.player.status}" styleClass="selectContainer" disabled="true">
-										<f:selectItems value="#{lolProfileMBean.playerStatus}"	var="_status" itemLabel="#{_status.name}"	itemValue="#{_status}" />
+									<h:selectOneMenu id="incluirStatusProfile"	value="#{smiteProfileMBean.player.status}" styleClass="selectContainer" disabled="true">
+										<f:selectItems value="#{smiteProfileMBean.playerStatus}"	var="_status" itemLabel="#{_status.name}"	itemValue="#{_status}" />
 									</h:selectOneMenu>
 								</div>
 							</div>
 							<h:commandButton class="btn waves-effect waves-light"
-								action="#{lolProfileMBean.cadastrarPlayer()}" value="Gravar">
+								action="#{smiteProfileMBean.cadastrarPlayer()}" value="Gravar">
 
 							</h:commandButton>
 						</h:form>
@@ -236,7 +236,7 @@
 								<div class='input-field col s6'>
 									<h:inputText class='validate' type="text"
 										name="atualizarProfile" id='atualizarProfile'
-										value="#{lolProfileMBean.player.playerName}" />
+										value="#{smiteProfileMBean.player.playerName}" />
 									<label for="atualizarProfile">Game Profile</label>
 								</div>
 								
@@ -244,26 +244,26 @@
 							<div class='col s6'>
 									<label for='IncluirRegiaoProfile'>Região</label>
 									<h:selectOneMenu id="atualizarRegiaoProfile"
-										value="#{lolProfileMBean.player.region}">
+										value="#{smiteProfileMBean.player.region}">
 										<f:selectItem itemValue="" itemLabel="Selecione" />
-										<f:selectItems value="#{lolProfileMBean.regioes}" var="_regioes" itemLabel="#{_regioes.name}" itemValue="#{_regioes}" />
+										<f:selectItems value="#{smiteProfileMBean.regioes}" var="_regioes" itemLabel="#{_regioes.name}" itemValue="#{_regioes}" />
 									</h:selectOneMenu>
 								</div>
 								<div class='col s6'>
 									<label for='IncluirRoleProfile'>Posição</label>
-									<h:selectOneMenu id="atualizarRoleProfile" value="#{lolProfileMBean.player.role}">
+									<h:selectOneMenu id="atualizarRoleProfile" value="#{smiteProfileMBean.player.role}">
 										<f:selectItem itemValue="" itemLabel="Selecione" />
-										<f:selectItems value="#{lolProfileMBean.roles}" var="_role"	itemLabel="#{_role.name}" itemValue="#{_role}" />
+										<f:selectItems value="#{smiteProfileMBean.roles}" var="_role"	itemLabel="#{_role.name}" itemValue="#{_role}" />
 									</h:selectOneMenu>
 								</div>
 								<div class='col s6'>
 									<label for='incluirStatusProfile'>Status</label>
-									<h:selectOneMenu id="incluirStatusProfile"	value="#{lolProfileMBean.player.status}" styleClass="selectContainer">
-										<f:selectItems value="#{lolProfileMBean.playerStatus}" var="_status" itemLabel="#{_status.name}" itemValue="#{_status}" />
+									<h:selectOneMenu id="incluirStatusProfile"	value="#{smiteProfileMBean.player.status}" styleClass="selectContainer">
+										<f:selectItems value="#{smiteProfileMBean.playerStatus}" var="_status" itemLabel="#{_status.name}" itemValue="#{_status}" />
 									</h:selectOneMenu>
 								</div>
 							<h:commandButton class="btn waves-effect waves-light"
-								action="#{lolProfileMBean.cadastrarPlayer()}" value="Atualizar" />
+								action="#{smiteProfileMBean.cadastrarPlayer()}" value="Atualizar" />
 						</h:form>
 					</h:panelGroup>
 				</div>
@@ -286,7 +286,7 @@
 							<center>
 							<h:commandButton
 								class="btn waves-effect waves-light center-align valign-wrapper"
-								action="#{lolProfileMBean.procurarTime()}" value="Clique Aqui" />
+								action="#{smiteProfileMBean.procurarTime()}" value="Clique Aqui" />
 								</center>
 						</h:form>
 					</h:panelGroup>
@@ -299,10 +299,10 @@
 			<div id="modal4" class="modal modalshort">
 
 				<div class="modal-content">
-					<h5> <strong> #{lolProfileMBean.team.top.playerName} </strong></h5>
+					<h5> <strong> #{smiteProfileMBean.team.solo.playerName} </strong></h5>
 					<ul>
-						<li> Level: #{lolProfileMBean.team.top.playerLevel} </li>
-						<li> Role: #{lolProfileMBean.team.top.role} </li>
+						<li> Level: #{smiteProfileMBean.team.solo.playerLevel} </li>
+						<li> Role: #{smiteProfileMBean.team.solo.role} </li>
 					</ul>
 				</div>
 			</div>
@@ -312,10 +312,10 @@
 			<div id="modal5" class="modal modalshort">
 
 				<div class="modal-content">
-					<h5> <strong> #{lolProfileMBean.team.jungler.playerName} </strong></h5>
+					<h5> <strong> #{smiteProfileMBean.team.jungler.playerName} </strong></h5>
 					<ul>
-						<li> Level: #{lolProfileMBean.team.jungler.playerLevel} </li>
-						<li> Role: #{lolProfileMBean.team.jungler.role} </li>
+						<li> Level: #{smiteProfileMBean.team.jungler.playerLevel} </li>
+						<li> Role: #{smiteProfileMBean.team.jungler.role} </li>
 					</ul>
 				</div>
 			</div>
@@ -325,10 +325,10 @@
 			<div id="modal6" class="modal modalshort">
 
 				<div class="modal-content">
-					<h5> <strong> #{lolProfileMBean.team.mid.playerName} </strong></h5>
+					<h5> <strong> #{smiteProfileMBean.team.mid.playerName} </strong></h5>
 					<ul>
-						<li> Level: #{lolProfileMBean.team.mid.playerLevel} </li>
-						<li> Role: #{lolProfileMBean.team.mid.role} </li>
+						<li> Level: #{smiteProfileMBean.team.mid.playerLevel} </li>
+						<li> Role: #{smiteProfileMBean.team.mid.role} </li>
 					</ul>
 				</div>
 			</div>
@@ -338,10 +338,10 @@
 			<div id="modal7" class="modal modalshort">
 
 				<div class="modal-content">
-					<h5> <strong> #{lolProfileMBean.team.support.playerName} </strong></h5>
+					<h5> <strong> #{smiteProfileMBean.team.support.playerName} </strong></h5>
 					<ul>
-						<li> Level: #{lolProfileMBean.team.support.playerLevel} </li>
-						<li> Role: #{lolProfileMBean.team.support.role} </li>
+						<li> Level: #{smiteProfileMBean.team.support.playerLevel} </li>
+						<li> Role: #{smiteProfileMBean.team.support.role} </li>
 					</ul>
 				</div>
 			</div>
@@ -351,10 +351,10 @@
 			<div id="modal8" class="modal modalshort">
 
 				<div class="modal-content">
-					<h5> <strong> #{lolProfileMBean.team.bottom.playerName} </strong></h5>
+					<h5> <strong> #{smiteProfileMBean.team.bottom.playerName} </strong></h5>
 					<ul>
-						<li> Level: #{lolProfileMBean.team.bottom.playerLevel} </li>
-						<li> Role: #{lolProfileMBean.team.bottom.role} </li>
+						<li> Level: #{smiteProfileMBean.team.bottom.playerLevel} </li>
+						<li> Role: #{smiteProfileMBean.team.bottom.role} </li>
 					</ul>
 				</div>
 			</div>

@@ -1,7 +1,7 @@
 package business.lol;
 
-public enum LolRole {
-	TOP("TOP"),
+public enum SmiteRole {
+	SOLO("SOLO"),
 	JUNGLER("JUNGLER"),
 	MID("MID"),
 	SUPPORT("SUPPORT"),
@@ -9,7 +9,7 @@ public enum LolRole {
 	
 	private final String name;
 	
-	private LolRole(String name){
+	private SmiteRole(String name){
 		this.name = name;
 	}
 	

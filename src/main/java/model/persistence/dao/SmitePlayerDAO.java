@@ -8,13 +8,13 @@ import org.hibernate.Transaction;
 import org.hibernate.boot.registry.StandardServiceRegistryBuilder;
 import org.hibernate.cfg.Configuration;
 
-import model.entities.LolPlayer;
+import model.entities.SmitePlayer;
 
-public class LolPlayerDAO implements GenericDAO<LolPlayer, Integer> {
+public class SmitePlayerDAO implements GenericDAO<SmitePlayer, Integer> {
 	private Session currentSession;
 	private Transaction currentTransaction;
 
-	public LolPlayerDAO() {
+	public SmitePlayerDAO() {
 	}
 	
 	public Session openCurrentSession() {
@@ -39,7 +39,7 @@ public class LolPlayerDAO implements GenericDAO<LolPlayer, Integer> {
 	
 	private static SessionFactory getSessionFactory() {
 		Configuration configuration = new Configuration().configure("/hibernate.cfg.xml");
-		configuration.addAnnotatedClass(LolPlayer.class);
+		configuration.addAnnotatedClass(SmitePlayer.class);
 		StandardServiceRegistryBuilder builder = new StandardServiceRegistryBuilder()
 				.applySettings(configuration.getProperties());
 		SessionFactory sessionFactory = configuration.buildSessionFactory(builder.build());
@@ -62,32 +62,32 @@ public class LolPlayerDAO implements GenericDAO<LolPlayer, Integer> {
 		this.currentTransaction = currentTransaction;
 	}
 
-	public LolPlayer findById(Integer id) {
-		LolPlayer player = (LolPlayer) getCurrentSession().get(LolPlayer.class, id);
+	public SmitePlayer findById(Integer id) {
+		SmitePlayer player = (SmitePlayer) getCurrentSession().get(SmitePlayer.class, id);
 		return player;
 	}
 
-	public void insert(LolPlayer player) {
+	public void insert(SmitePlayer player) {
 		getCurrentSession().save(player);
 	}
 
-	public void delete(LolPlayer player) {
+	public void delete(SmitePlayer player) {
 		getCurrentSession().delete(player);
 	}
 
-	public void update(LolPlayer player) {
+	public void update(SmitePlayer player) {
 		getCurrentSession().update(player);
 	}
 
 	@SuppressWarnings("unchecked")
-	public List<LolPlayer> findAll() {
-		List<LolPlayer> players = (List<LolPlayer>) getCurrentSession().createQuery("FROM lolplayer").list();
+	public List<SmitePlayer> findAll() {
+		List<SmitePlayer> players = (List<SmitePlayer>) getCurrentSession().createQuery("FROM SmitePlayer").list();
 		return players;
 	}
 	
 	public void deleteAll(){
-		List<LolPlayer> players = findAll();
-		for (LolPlayer player : players)
+		List<SmitePlayer> players = findAll();
+		for (SmitePlayer player : players)
 			delete(player);
 	}
 }

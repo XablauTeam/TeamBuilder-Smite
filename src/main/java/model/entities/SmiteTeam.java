@@ -7,70 +7,70 @@ import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
 @Entity
-@Table(name="lolteam")
-public class LolTeam extends AbstractTeam {
+@Table(name="smiteteam")
+public class SmiteTeam extends AbstractTeam {
 	
 	@OneToOne(fetch = FetchType.EAGER)
-	@JoinColumn(name = "top")
-	private LolPlayer top;
+	@JoinColumn(name = "solo")
+	private SmitePlayer solo;
 	
 	@OneToOne(fetch = FetchType.EAGER)
 	@JoinColumn(name = "jungler")
-	private LolPlayer jungler;
+	private SmitePlayer jungler;
 	
 	@OneToOne(fetch = FetchType.EAGER)
 	@JoinColumn(name = "mid")
-	private LolPlayer mid;
+	private SmitePlayer mid;
 	
 	@OneToOne(fetch = FetchType.EAGER)
 	@JoinColumn(name = "support")
-	private LolPlayer support;
+	private SmitePlayer support;
 	
 	@OneToOne(fetch = FetchType.EAGER)
 	@JoinColumn(name = "bottom")
-	private LolPlayer bottom;
+	private SmitePlayer bottom;
 	
-	public LolTeam(){
+	public SmiteTeam(){
 		super();
 	}
 
-	public LolPlayer getTop() {
-		return top;
+	public SmitePlayer getSolo() {
+		return solo;
 	}
 
-	public void setTop(LolPlayer top) {
-		this.top = top;
+	public void setSolo(SmitePlayer top) {
+		this.solo = top;
 	}
 
-	public LolPlayer getJungler() {
+	public SmitePlayer getJungler() {
 		return jungler;
 	}
 
-	public void setJungler(LolPlayer jungler) {
+	public void setJungler(SmitePlayer jungler) {
 		this.jungler = jungler;
 	}
 
-	public LolPlayer getMid() {
+	public SmitePlayer getMid() {
 		return mid;
 	}
 
-	public void setMid(LolPlayer mid) {
+	public void setMid(SmitePlayer mid) {
 		this.mid = mid;
 	}
 
-	public LolPlayer getSupport() {
+	public SmitePlayer getSupport() {
 		return support;
 	}
 
-	public void setSupport(LolPlayer support) {
+	public void setSupport(SmitePlayer support) {
 		this.support = support;
 	}
 
-	public LolPlayer getBottom() {
+	public SmitePlayer getBottom() {
 		return bottom;
 	}
 
-	public void setBottom(LolPlayer bottom) {
+	public void setBottom(SmitePlayer bottom) {
 		this.bottom = bottom;
 	}
 }

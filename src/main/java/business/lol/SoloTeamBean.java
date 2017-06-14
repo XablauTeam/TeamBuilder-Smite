@@ -11,28 +11,28 @@ import business.TeamStatus;
 import business.exceptions.CannotInsertException;
 import model.entities.AbstractPlayer;
 import model.entities.AbstractTeam;
-import model.entities.LolPlayer;
-import model.entities.LolTeam;
-import model.persistence.service.LolTeamService;
+import model.entities.SmitePlayer;
+import model.entities.SmiteTeam;
+import model.persistence.service.SmiteTeamService;
 
 @Stateless
-public class LolTeamBean {
+public class SoloTeamBean {
 
 	@EJB
-	private LolTeamService lolTeamService;
+	private SmiteTeamService smiteTeamService;
 	@EJB
-	private LolTeamProcessor lolTeamProcessor;
+	private SmiteTeamProcessor smiteTeamProcessor;
 	@EJB
 	private PlayerBean playerBean;
 	
 	
 	
 	public AbstractTeam findTeam(AbstractPlayer player) {
-		ArrayList<LolTeam> teamList = (ArrayList<LolTeam>) lolTeamService.findAll();
+		ArrayList<SmiteTeam> teamList = (ArrayList<SmiteTeam>) smiteTeamService.findAll();
 		if (!teamList.isEmpty()) {
-			for (LolTeam teamAnalyzed : teamList) {
+			for (SmiteTeam teamAnalyzed : teamList) {
 				if (teamAnalyzed.getStatus() != TeamStatus.COMPLETE && 
-						lolTeamProcessor.isRoleNeeded(teamAnalyzed, player)) {
+						smiteTeamProcessor.isRoleNeeded(teamAnalyzed, player)) {
 					return teamAnalyzed;
 				}
 			}
@@ -42,17 +42,17 @@ public class LolTeamBean {
 	}
 
 	public AbstractTeam createNewTeam(AbstractPlayer player) {
-		LolTeam lolTeam = new LolTeam();
-		lolTeamService.insert(lolTeam);
-		return lolTeam;
+		SmiteTeam smiteTeam = new SmiteTeam();
+		smiteTeamService.insert(smiteTeam);
+		return smiteTeam;
 	}
 
 	public void insertPlayerInTeam(AbstractPlayer player, AbstractTeam team) throws CannotInsertException {
-		lolTeamProcessor.insertPlayerInTeam(player, team);
-		lolTeamService.update((LolTeam) team);
+		smiteTeamProcessor.insertPlayerInTeam(player, team);
+		smiteTeamService.update((SmiteTeam) team);
 		player.setTeamID(team.getIdTime());
 		player.setStatus(PlayerStatus.IN_TEAM);
-		playerBean.atualizarPlayer((LolPlayer)player);
+		playerBean.atualizarPlayer((SmitePlayer)player);
 	}
 
 	public boolean playerHasTeam(AbstractPlayer player) {
@@ -60,18 +60,18 @@ public class LolTeamBean {
 	}
 
 	public boolean removePlayerFromTeam(AbstractPlayer player) {
-		LolTeam team;
+		SmiteTeam team;
 		if (player.getTeamID() != 0) {
-			team = lolTeamService.findById(player.getTeamID());
-			lolTeamProcessor.removePlayer(player, team);
-			lolTeamService.update(team);
+			team = smiteTeamService.findById(player.getTeamID());
+			smiteTeamProcessor.removePlayer(player, team);
+			smiteTeamService.update(team);
 			return true;
 		}
 		return false;
 	}
 	
-	public LolTeam findTeamByID(Integer playerID){
-		return lolTeamService.findById(playerID);
+	public SmiteTeam findTeamByID(Integer playerID){
+		return smiteTeamService.findById(playerID);
 	}
 
 }

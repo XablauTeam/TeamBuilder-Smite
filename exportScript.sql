@@ -110,3 +110,16 @@ alter table lolteam add constraint FKauoatk2dsrc2ltsithb7h1oo4 foreign key (mid)
 alter table lolteam add constraint FKjkyioiroh3j8ppsjm4918bfo5 foreign key (support) references LOLPLAYER (id_player);
 alter table lolteam add constraint FKq9khsbithtisl943hlwe1ih1x foreign key (top) references LOLPLAYER (id_player);
 alter table USUARIO add constraint FK9kjaljj25ppkddfobodkkadq3 foreign key (player_id_player) references LOLPLAYER (id_player);
+drop table if exists SMITEPLAYER;
+drop table if exists smiteteam;
+drop table if exists USUARIO;
+create table SMITEPLAYER (id_player integer not null auto_increment, gamePlayerID bigint, playerLevel bigint, playerName varchar(255), playerStatus varchar(255), teamID integer, smiteregion varchar(255), smiterole varchar(255), primary key (id_player)) engine=MyISAM;
+create table smiteteam (id_time integer not null auto_increment, status_time varchar(255), bottom integer, jungler integer, mid integer, solo integer, support integer, primary key (id_time)) engine=MyISAM;
+create table USUARIO (id_usuario integer not null auto_increment, email varchar(255), login varchar(255), nome varchar(255), password varchar(255), player_id_player integer, primary key (id_usuario)) engine=MyISAM;
+alter table USUARIO add constraint UK_fiaj0vs5nduv6knel78ihnfs3 unique (login);
+alter table smiteteam add constraint FKls48604ggtxxgk81g6yb1gdbj foreign key (bottom) references SMITEPLAYER (id_player);
+alter table smiteteam add constraint FK11og03c4ufeeus3xv03upy8ow foreign key (jungler) references SMITEPLAYER (id_player);
+alter table smiteteam add constraint FKa1faq7yw0krmb7ac1fk17btsq foreign key (mid) references SMITEPLAYER (id_player);
+alter table smiteteam add constraint FKgwwxf2cb6lnqhjp7x78ft1irc foreign key (solo) references SMITEPLAYER (id_player);
+alter table smiteteam add constraint FK2rshw1jj696jhefxcp2w5mwdh foreign key (support) references SMITEPLAYER (id_player);
+alter table USUARIO add constraint FKiasfw64fhb2bbhiicr2ivxm0s foreign key (player_id_player) references SMITEPLAYER (id_player);
